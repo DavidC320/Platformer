@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=4 format=3 uid="uid://dje0pxlxjg6jd"]
+
+[ext_resource type="Texture2D" uid="uid://cc0tm01dqmp85" path="res://Assets/Tilesets/Character.png" id="1_8lp8w"]
+[ext_resource type="Script" path="res://Scripts/resources/projectile_resource.gd" id="1_d7cyn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muki5"]
+atlas = ExtResource("1_8lp8w")
+region = Rect2(30, 10, 10, 10)
+
+[resource]
+script = ExtResource("1_d7cyn")
+projectile_name = "Ball"
+description = "None"
+only_make_big = false
+gravity = 2080
+damage = 1
+speed = 300
+rebound = -350.0
+floor_bounce_count = -1
+wall_bounce_count = 1
+item_texture = SubResource("AtlasTexture_muki5")
+item_speed = 150.0

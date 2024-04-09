@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://cm13cvkta47yc"]
+
+[ext_resource type="Texture2D" uid="uid://cc0tm01dqmp85" path="res://Assets/Tilesets/Character.png" id="1_lypgc"]
+[ext_resource type="Script" path="res://Scripts/PowerUp.gd" id="1_nxotj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldhwi"]
+atlas = ExtResource("1_lypgc")
+region = Rect2(20, 10, 10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftbuk"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6wuv"]
+size = Vector2(2.5, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjsqg"]
+size = Vector2(2.5, 29)
+
+[node name="PowerUp" type="CharacterBody2D"]
+collision_layer = 16
+script = ExtResource("1_nxotj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(7.15256e-07, -1.19209e-06)
+scale = Vector2(3.2, 3.2)
+texture = SubResource("AtlasTexture_ldhwi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ftbuk")
+
+[node name="LeftGroundArea" type="Area2D" parent="."]
+position = Vector2(-16, 0)
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGroundArea"]
+position = Vector2(-1.25, 0)
+shape = SubResource("RectangleShape2D_n6wuv")
+
+[node name="RightGroundArea" type="Area2D" parent="."]
+position = Vector2(16, 0)
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightGroundArea"]
+position = Vector2(1.25, 0)
+shape = SubResource("RectangleShape2D_gjsqg")
+
+[connection signal="body_entered" from="LeftGroundArea" to="." method="_on_left_ground_area_body_entered"]
+[connection signal="body_entered" from="RightGroundArea" to="." method="_on_right_ground_area_body_entered"]

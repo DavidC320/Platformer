@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=3 uid="uid://caniqyxwsqux0"]
+
+[ext_resource type="Texture2D" uid="uid://cc0tm01dqmp85" path="res://Assets/Tilesets/Character.png" id="1_ipuam"]
+[ext_resource type="Script" path="res://Scripts/menues/Intro.gd" id="1_v3v5c"]
+[ext_resource type="AudioStream" uid="uid://buhbb26i8danb" path="res://Assets/BGM/Juhani Junkala [Chiptune Adventures] 4. Stage Select.wav" id="3_nf1ia"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2ir1"]
+atlas = ExtResource("1_ipuam")
+region = Rect2(30, 0, 10, 10)
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v3v5c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.145098, 0.266667, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(600, 268)
+scale = Vector2(8, 8)
+texture = SubResource("AtlasTexture_r2ir1")
+flip_h = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 96.0
+offset_right = 511.0
+offset_bottom = 405.0
+text = "One night, a windy full moon. Tinker was getting ready for bed.
+A weary child after a long day of playing games with friends.
+The moon glowed with the sun's light towards the window.
+Tinker's toy box began to glow with a starnge blue light.
+A tired child tippy toes their way towards the toy box.
+For Tinker doesn't want to wake up thier parents up at such
+a late time.
+Tinker opens the box and finds they are flashed with the bright
+glow of cyan as they stumble into the box.
+
+Tinker is now in the world of dreams and needs to collect 10
+peices of candy to get back to her room to sleep!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 36.0
+offset_right = 94.0
+offset_bottom = 63.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 29
+text = "Tinker in La La Land"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -66.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Retry" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Play"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nf1ia")
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

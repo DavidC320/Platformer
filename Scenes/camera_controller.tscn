@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnkq0uc654onj"]
+
+[ext_resource type="Script" path="res://Scripts/camera_controller.gd" id="1_hj2hn"]
+[ext_resource type="PackedScene" uid="uid://dl1rvggmnjx17" path="res://Scenes/player_score.tscn" id="2_mv63h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfu06"]
+size = Vector2(256, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qj77i"]
+size = Vector2(16, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2x02o"]
+
+[node name="CameraController" type="CharacterBody2D"]
+script = ExtResource("1_hj2hn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+position_smoothing_speed = 7.335
+drag_horizontal_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.54902, 0.498039, 0.964706, 1)
+
+[node name="PlayerScore" parent="CanvasLayer" instance=ExtResource("2_mv63h")]
+
+[node name="LeftMover" type="Area2D" parent="."]
+position = Vector2(48, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftMover"]
+position = Vector2(80, 324)
+shape = SubResource("RectangleShape2D_sfu06")
+
+[node name="RightMover" type="Area2D" parent="."]
+position = Vector2(408, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightMover"]
+position = Vector2(128, 324)
+shape = SubResource("RectangleShape2D_sfu06")
+
+[node name="LeftCameraBoundary" type="StaticBody2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftCameraBoundary"]
+position = Vector2(-8, 324)
+shape = SubResource("RectangleShape2D_qj77i")
+
+[node name="RightCameraBoundary" type="StaticBody2D" parent="."]
+position = Vector2(700, 0)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightCameraBoundary"]
+position = Vector2(8, 324)
+shape = SubResource("RectangleShape2D_qj77i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2x02o")
+disabled = true

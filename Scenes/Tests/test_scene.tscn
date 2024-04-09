@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://1p7fhk6vmp86"]
+
+[ext_resource type="Script" path="res://scripts/Tests/test_scene.gd" id="1_k6ear"]
+[ext_resource type="Texture2D" uid="uid://qc3loasltaka" path="res://icon.svg" id="1_qoh3l"]
+[ext_resource type="Script" path="res://Scripts/resources/projectile_resource.gd" id="2_huxmt"]
+
+[sub_resource type="Resource" id="Resource_v26vm"]
+script = ExtResource("2_huxmt")
+projectile_name = "Null"
+description = "None"
+only_make_big = false
+gravity = 2080
+damage = 1
+speed = 300
+rebound = -350.0
+floor_bounce_count = -1
+wall_bounce_count = 1
+item_speed = 300.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_o7u3u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldtx0"]
+size = Vector2(1152, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkb06"]
+size = Vector2(128, 128)
+
+[node name="TestScene" type="Node2D"]
+position = Vector2(0, 112)
+script = ExtResource("1_k6ear")
+projectile_resource = SubResource("Resource_v26vm")
+
+[node name="Ground" type="Node2D" parent="."]
+position = Vector2(0, 72)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ground"]
+position = Vector2(0, 280)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground/StaticBody2D"]
+position = Vector2(575.25, 14)
+scale = Vector2(1151.5, 56)
+mesh = SubResource("QuadMesh_o7u3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/StaticBody2D"]
+position = Vector2(576, 14)
+shape = SubResource("RectangleShape2D_ldtx0")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Ground"]
+position = Vector2(-40, 464)
+rotation = -1.5708
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground/StaticBody2D2"]
+position = Vector2(575.25, 14)
+scale = Vector2(1151.5, 56)
+mesh = SubResource("QuadMesh_o7u3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/StaticBody2D2"]
+position = Vector2(576, 14)
+shape = SubResource("RectangleShape2D_ldtx0")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Ground"]
+position = Vector2(1160, 464)
+rotation = -1.5708
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground/StaticBody2D3"]
+position = Vector2(575.25, 14)
+scale = Vector2(1151.5, 56)
+mesh = SubResource("QuadMesh_o7u3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/StaticBody2D3"]
+position = Vector2(576, 14)
+shape = SubResource("RectangleShape2D_ldtx0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Spawn Projectile"
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(96, 304)
+
+[node name="Icon" type="Sprite2D" parent="Marker2D"]
+scale = Vector2(0.295, 0.295)
+texture = ExtResource("1_qoh3l")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1016, 24)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_qoh3l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_tkb06")
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

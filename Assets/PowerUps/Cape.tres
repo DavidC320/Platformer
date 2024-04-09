@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=4 format=3 uid="uid://bnggorg2i3gyf"]
+
+[ext_resource type="Texture2D" uid="uid://cc0tm01dqmp85" path="res://Assets/Tilesets/Character.png" id="1_k36gl"]
+[ext_resource type="Script" path="res://Scripts/resources/projectile_resource.gd" id="1_sfh1r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16e8w"]
+atlas = ExtResource("1_k36gl")
+region = Rect2(20, 10, 10, 10)
+
+[resource]
+script = ExtResource("1_sfh1r")
+projectile_name = "Cape"
+description = "None"
+only_make_big = true
+gravity = 2080
+damage = 1
+speed = 300
+rebound = -350.0
+floor_bounce_count = -1
+wall_bounce_count = 1
+item_texture = SubResource("AtlasTexture_16e8w")
+item_speed = 150.0

@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://b3k6b4i8revot"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_8xcnp"]
+[ext_resource type="Texture2D" uid="uid://cc0tm01dqmp85" path="res://Assets/Tilesets/Character.png" id="2_m5yh5"]
+[ext_resource type="AudioStream" uid="uid://bn30m8x45encv" path="res://Assets/sfx/hitHurt(2).wav" id="3_ay08g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsr65"]
+atlas = ExtResource("2_m5yh5")
+region = Rect2(30, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8df1"]
+atlas = ExtResource("2_m5yh5")
+region = Rect2(10, 20, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_707ko"]
+atlas = ExtResource("2_m5yh5")
+region = Rect2(20, 20, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_78pnu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsr65")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8df1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_707ko")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bijd5"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkj03"]
+size = Vector2(2.5, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_by4v8"]
+size = Vector2(2.5, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6g4x"]
+size = Vector2(32, 11.5)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_8xcnp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -4)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_78pnu")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bijd5")
+
+[node name="LeftGroundCheck" type="RayCast2D" parent="."]
+position = Vector2(-16, 0)
+
+[node name="RightGroundCheck" type="RayCast2D" parent="."]
+position = Vector2(16, 0)
+
+[node name="LeftGroundArea" type="Area2D" parent="."]
+position = Vector2(-16, 0)
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGroundArea"]
+position = Vector2(-1.25, 0)
+shape = SubResource("RectangleShape2D_xkj03")
+
+[node name="RightGroundArea" type="Area2D" parent="."]
+position = Vector2(16, 0)
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightGroundArea"]
+position = Vector2(1.25, 0)
+shape = SubResource("RectangleShape2D_by4v8")
+
+[node name="KillBox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillBox"]
+position = Vector2(-4.76837e-07, -13.75)
+shape = SubResource("RectangleShape2D_e6g4x")
+
+[node name="hurt_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ay08g")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="LeftGroundArea" to="." method="_on_left_ground_area_body_entered"]
+[connection signal="body_entered" from="RightGroundArea" to="." method="_on_right_ground_area_body_entered"]
+[connection signal="body_entered" from="KillBox" to="." method="_on_kill_box_body_entered"]

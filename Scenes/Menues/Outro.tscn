@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfvbpkyw8l610"]
+
+[ext_resource type="Script" path="res://Scripts/menues/Outro.gd" id="1_d6m8h"]
+[ext_resource type="Texture2D" uid="uid://cc0tm01dqmp85" path="res://Assets/Tilesets/Character.png" id="1_vkhy5"]
+[ext_resource type="AudioStream" uid="uid://d15l45ct2juo5" path="res://Assets/BGM/Juhani Junkala [Chiptune Adventures] 2. Stage2.wav" id="3_8dv6h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqboq"]
+atlas = ExtResource("1_vkhy5")
+region = Rect2(0, 10, 10, 10)
+
+[node name="Outro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d6m8h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.262745, 0.458824, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(600, 268)
+scale = Vector2(8, 8)
+texture = SubResource("AtlasTexture_kqboq")
+flip_h = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 144.0
+offset_right = 555.0
+offset_bottom = 453.0
+text = "Tinker got out of the world of dreams!
+With a sigh of relief, Tinker can crawl back to thier bed
+and lay upon the comforting arms of the bed.
+As Tinker lays on their bed, the box still glows.
+
+
+Thank you for playing!
+Music by Juhani Junkala
+Art by David Cruz
+Developed by David Cruz
+Sound Effects from Jsfxr"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 36.0
+offset_right = 94.0
+offset_bottom = 63.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 29
+text = "Tinker got out!"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -66.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Retry" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Replay"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8dv6h")
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

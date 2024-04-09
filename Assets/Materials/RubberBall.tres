@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c878kwvlumcvm"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/player.gdshader" id="1_4rvme"]
+
+[resource]
+shader = ExtResource("1_4rvme")
+shader_parameter/origin_1 = Color(0, 0.92549, 1, 1)
+shader_parameter/new_1 = Color(1, 0, 0, 1)
+shader_parameter/origin_2 = Color(0.027451, 0.713726, 0.772549, 1)
+shader_parameter/new_2 = Color(0.407843, 0, 0, 1)
